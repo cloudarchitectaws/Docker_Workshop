@@ -1,0 +1,26 @@
+How to build Docker Container Images with Dockerfile
+
+Step:1 Create a Dockerfile
+mkdir /mycode
+cd /mycode/
+touch Dockerfile
+
+Step:2 Add Keywords and Commands to Dockerfile
+vi Dockerfile
+FROM mycentos:v2
+MAINTAINER  Sivakumar_KS
+RUN yum -y install httpd php
+RUN echo "Website is hosted inside a container" > /var/www/html/index.html
+EXPOSE 80
+RUN echo "httpd" >> /root/.bashrc
+CMD ["/bin/bash"]
+
+Step:3 Build the image using ‘docker build command’
+docker build -t mycentos:apachev1
+
+Step:4 Verify the new Docker Image and launch a container
+docker images
+docker run -it -p 80:80 --name=web_container1 mycentos:apachev1
+
+========================================================================
+
